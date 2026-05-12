@@ -1,19 +1,41 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.soumikbhatt.plugintranslators</id>
-    <name>plugin-translators</name>
+    <name>Android String Translator</name>
     <vendor>soumikbhatt</vendor>
     <description><![CDATA[
-        <p><b>plugin-translators</b> is a repository that provides a pure template to make it easier to create a new plugin project.</p>
-        <p>The main goal of this template is to speed up the setup phase of plugin development for both new and experienced developers by preconfiguring the project scaffold and CI, linking to the proper documentation pages, and keeping everything organized.</p>
+        <p>Translate Android string resources automatically using Google Translate API.</p>
+        <p>Features:</p>
+        <ul>
+            <li>Right-click on strings.xml to translate.</li>
+            <li>Select target language from a wide list.</li>
+            <li>Automatically generates values-xx/strings.xml.</li>
+            <li>Preserves Android string placeholders (e.g., %s, %1$s).</li>
+        </ul>
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.xml</depends>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
+    <actions>
+        <action id="com.github.soumikbhatt.plugintranslators.actions.TranslateStringsAction"
+                class="com.github.soumikbhatt.plugintranslators.actions.TranslateStringsAction"
+                text="Translate Strings"
+                description="Translate Android string resources to another language">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+    </actions>
+
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.soumikbhatt.plugintranslators.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-        <postStartupActivity implementation="com.github.soumikbhatt.plugintranslators.startup.MyProjectActivity" />
+        <projectConfigurable
+                parentId="tools"
+                instance="com.github.soumikbhatt.plugintranslators.ui.SettingsConfigurable"
+                id="com.github.soumikbhatt.plugintranslators.ui.SettingsConfigurable"
+                displayName="Android String Translator"/>
+
+        <notificationGroup id="Android String Translator" displayType="BALLOON"/>
     </extensions>
 </idea-plugin>
