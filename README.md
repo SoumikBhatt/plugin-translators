@@ -1,45 +1,54 @@
-# plugin-translators
+# Android String Translator
 
 ![Build](https://github.com/SoumikBhatt/plugin-translators/workflows/Build/badge.svg)
-[![Version](https://img.shields.io/jetbrains/plugin/v/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
 
-## Template ToDo list
-- [x] Create a new [IntelliJ Platform Plugin Template][template] project.
-- [ ] Get familiar with the [template documentation][template].
-- [ ] Adjust the [group](./gradle.properties), as well as the [id](./src/main/resources/META-INF/plugin.xml), [name](./src/main/resources/META-INF/plugin.xml), and [sources package](./src/main/kotlin).
-- [ ] Adjust the plugin [description](./src/main/resources/META-INF/plugin.xml) (see [Tips][docs:plugin-description]) and this README to describe what your plugin does.
-- [ ] Review the [Legal Agreements](https://plugins.jetbrains.com/docs/marketplace/legal-agreements.html?from=IJPluginTemplate).
-- [ ] [Publish a plugin manually](https://plugins.jetbrains.com/docs/intellij/publishing-plugin.html?from=IJPluginTemplate) for the first time.
-- [ ] Set the `MARKETPLACE_ID` in the above README badges. You can obtain it once the plugin is published to JetBrains Marketplace.
-- [ ] Set the [Plugin Signing](https://plugins.jetbrains.com/docs/intellij/plugin-signing.html?from=IJPluginTemplate) related [secrets](https://github.com/JetBrains/intellij-platform-plugin-template#environment-variables).
-- [ ] Set the [Deployment Token](https://plugins.jetbrains.com/docs/marketplace/plugin-upload.html?from=IJPluginTemplate).
-- [ ] Click the <kbd>Watch</kbd> button on the top of the [IntelliJ Platform Plugin Template][template] to be notified about releases containing new features and fixes.
+**Android String Translator** is an IntelliJ Platform plugin designed for Android developers to automate the localization of `strings.xml` resources. Translate your app into 100+ languages in seconds using Google Translate or LibreTranslate.
 
-This Fancy IntelliJ Platform Plugin is going to be your implementation of the brilliant ideas that you have.
+## 🚀 Features
 
-## Installation
+- **Multi-Provider Support**: Choose between Google Translate API (Paid) or LibreTranslate (Free/Self-hosted).
+- **One-Click Translation**: Right-click any `strings.xml` file to start the translation flow.
+- **Keyboard Shortcut**: Use `Option+T` (macOS) or `Alt+T` (Windows/Linux) for instant translation.
+- **Searchable Language Selection**: Quickly find your target language from a list of 100+ supported locales.
+- **Placeholder Protection**: Automatically wraps Android placeholders (e.g., `%s`, `%1$s`, `%d`) to ensure they are not corrupted during translation.
+- **Automatic Resource Generation**: Generates the correct `values-xx/strings.xml` directory and file structure automatically.
 
-- Using the IDE built-in plugin system:
+## 🛠 Installation
 
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "plugin-translators"</kbd> >
-  <kbd>Install</kbd>
+### From JetBrains Marketplace (Coming Soon)
+- Open **Settings/Preferences** > **Plugins** > **Marketplace**.
+- Search for "Android String Translator".
+- Click **Install**.
 
-- Using JetBrains Marketplace:
+### Manual Installation
+1. Download the latest release `.zip` file from the [Releases](https://github.com/SoumikBhatt/plugin-translators/releases) page.
+2. In your IDE, go to **Settings/Preferences** > **Plugins**.
+3. Click the ⚙️ (Gear Icon) and select **Install Plugin from Disk...**.
+4. Select the downloaded `.zip` file and restart the IDE.
 
-  Go to [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID) and install it by clicking the <kbd>Install to ...</kbd> button in case your IDE is running.
+## 📖 Usage
 
-  You can also download the [latest release](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID/versions) from JetBrains Marketplace and install it manually using
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
+1. **Configure Settings**:
+   - Go to `Tools -> Android String Translator -> Settings`.
+   - Select your provider (Google or LibreTranslate).
+   - Enter your API Key (for Google) or Base URL (for LibreTranslate).
+2. **Translate**:
+   - Locate your default `strings.xml` in the Project view.
+   - Right-click and select **Translate Strings** OR press `Alt+T` / `Option+T`.
+3. **Select Language**:
+   - Pick your target language from the dialog.
+4. **Result**:
+   - A new localized `strings.xml` will be created in the appropriate `values-xx` folder.
 
-- Manually:
+## 🏗 Building from Source
 
-  Download the [latest release](https://github.com/SoumikBhatt/plugin-translators/releases/latest) and install it manually using
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
+To build the plugin locally:
 
+```bash
+./gradlew buildPlugin
+```
 
----
-Plugin based on the [IntelliJ Platform Plugin Template][template].
+The distribution zip will be available in `build/distributions/`.
 
-[template]: https://github.com/JetBrains/intellij-platform-plugin-template
-[docs:plugin-description]: https://plugins.jetbrains.com/docs/intellij/plugin-user-experience.html#plugin-description-and-presentation
+## 📄 License
+This project is licensed under the MIT License.
