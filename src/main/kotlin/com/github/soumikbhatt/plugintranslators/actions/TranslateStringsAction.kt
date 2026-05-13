@@ -4,21 +4,28 @@ import com.github.soumikbhatt.plugintranslators.services.SettingsService
 import com.github.soumikbhatt.plugintranslators.services.TranslationTask
 import com.github.soumikbhatt.plugintranslators.ui.LanguageSelectionDialog
 import com.github.soumikbhatt.plugintranslators.utils.NotificationUtils
+import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 
 class TranslateStringsAction : AnAction() {
 
+    override fun getActionUpdateThread(): ActionUpdateThread {
+        return ActionUpdateThread.BGT
+    }
+
     override fun update(e: AnActionEvent) {
-        val virtualFile = e.getData(CommonDataKeys.VIRTUAL_FILE)
-        val isStringsXml = virtualFile?.name == "strings.xml"
-        e.presentation.isEnabledAndVisible = isStringsXml
+        val virtualFiles = e.getData(CommonDataKeys.VIRTUAL_FILE_ARRAY)
+        val isSingleStringsXml = virtualFiles?.size == 1 && virtualFiles[0].name == "strings.xml"
+        
+        e.presentation.isEnabledAndVisible = isSingleStringsXml
     }
 
     override fun actionPerformed(e: AnActionEvent) {
         val project = e.project ?: return
-        val virtualFile = e.getData(CommonDataKeys.VIRTUAL_FILE) ?: return
+        val virtualFiles = e.getData(CommonDataKeys.VIRTUAL_FILE_ARRAY)
+        val virtualFile = virtualFiles?.firstOrNull() ?: return
 
         // 1. Check if configured
         val settings = SettingsService.getInstance(project)
