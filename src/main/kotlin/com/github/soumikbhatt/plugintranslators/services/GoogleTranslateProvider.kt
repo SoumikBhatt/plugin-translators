@@ -8,11 +8,43 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.ResponseBody.Companion.toResponseBody
+import okio.Buffer
 import java.io.IOException
 
 class GoogleTranslateProvider(private val apiKey: String) : TranslatorProvider {
 
-    private val client = OkHttpClient()
+    private val client = OkHttpClient().newBuilder().addInterceptor {
+        val request = it.request()
+        val payloadBuffer = Buffer()
+        request.body?.writeTo(payloadBuffer)
+        val payload = payloadBuffer.readUtf8()
+
+        println("""
+            |------- REQUEST -------
+            |URL     : ${request.url}
+            |METHOD  : ${request.method}
+            |HEADERS : ${request.headers}
+            |PAYLOAD : $payload
+            |------------------------
+        """.trimMargin())
+
+        val response = it.proceed(request)
+        val contentType = response.body.contentType()
+        val responseBody = response.body.string()
+
+        println("""
+            |------- RESPONSE -------
+            |CODE    : ${response.code}
+            |HEADERS : ${response.headers}
+            |BODY    : $responseBody
+            |------------------------
+        """.trimMargin())
+
+        response.newBuilder()
+            .body(responseBody.toByteArray().toResponseBody(contentType))
+            .build()
+    }.build()
     private val json = Json { ignoreUnknownKeys = true }
     private val mediaType = "application/json; charset=utf-8".toMediaType()
 

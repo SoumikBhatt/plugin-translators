@@ -27,14 +27,14 @@ class SettingsConfigurable(private val project: Project) : Configurable {
         }
 
         mySettingsComponent = FormBuilder.createFormBuilder()
-            .addLabeledComponent(JBLabel("Translation Provider: "), providerComboBox, 1, false)
+            .addLabeledComponent(JBLabel("Translation provider: "), providerComboBox, 1, false)
             .addSeparator()
             .addLabeledComponent(JBLabel("Google API Key: "), googleApiKeyField, 1, false)
             .addLabeledComponent(JBLabel("LibreTranslate URL: "), libreUrlField, 1, false)
             .addLabeledComponent(JBLabel("LibreTranslate API Key (Optional): "), libreApiKeyField, 1, false)
             .addComponentFillVertically(JPanel(), 0)
             .panel
-            
+
         updateVisibility()
         return mySettingsComponent!!
     }

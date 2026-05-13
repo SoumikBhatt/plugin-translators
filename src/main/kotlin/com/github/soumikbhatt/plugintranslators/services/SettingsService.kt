@@ -15,7 +15,7 @@ class SettingsService : PersistentStateComponent<SettingsService.State> {
 
     class State {
         var googleTranslateApiKey: String = ""
-        var selectedProvider: String = "libre" // Default to libre for now as requested
+        var selectedProvider: String = "google" // Default to libre for now as requested
         var libreTranslateUrl: String = "https://libretranslate.de"
         var libreTranslateApiKey: String = ""
     }
