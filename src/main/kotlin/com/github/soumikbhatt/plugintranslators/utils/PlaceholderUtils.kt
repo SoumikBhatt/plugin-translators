@@ -29,9 +29,10 @@ object PlaceholderUtils {
      */
     fun unprotectPlaceholders(text: String): String {
         return text.replace("<span class=\"notranslate\">", "")
-            .replace("</span>", "")
             .replace("<span class = \"notranslate\">", "") // Handle potential spacing from API
-            .replace(" </ span>", "</span>")
-            .replace("</ span>", "</span>")
+            .replace("</span>", "")
+            .replace(" </ span>", "")
+            .replace("</ span>", "")
+            .replace("</span >", "")
     }
 }
