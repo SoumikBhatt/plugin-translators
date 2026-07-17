@@ -1,6 +1,6 @@
-# Android String Translator
+# Android String Translator [[Download](https://plugins.jetbrains.com/plugin/31747-android-string-translator)]
 
-![Build](https://github.com/SoumikBhatt/plugin-translators/workflows/Build/badge.svg)
+![Build](https://github.com/SoumikBhatt/plugin-translators/workflows/Build/badge.svg) 
 
 **Android String Translator** is an IntelliJ Platform plugin designed for Android developers to automate the localization of `strings.xml` resources. Translate your app into 100+ languages in seconds using Google Translate or LibreTranslate.
 
@@ -15,7 +15,7 @@
 
 ## 🛠 Installation
 
-### From JetBrains Marketplace (Coming Soon)
+### From JetBrains Marketplace
 - Open **Settings/Preferences** > **Plugins** > **Marketplace**.
 - Search for "Android String Translator".
 - Click **Install**.
